@@ -7,7 +7,6 @@ class CarImpl implements Car {
 	public void driverCar() {
 		System.out.println(" be a polite driver ");
 	}
-
 }
 
 class ProxyCar implements Car {
@@ -25,6 +24,9 @@ class ProxyCar implements Car {
 	}
 
 	public void setDriver(Driver driver) {
+		if(driver == null){
+			throw new IllegalArgumentException("driver can not be null");
+		}
 		this.driver = driver;
 	}
 
@@ -33,6 +35,9 @@ class ProxyCar implements Car {
 	}
 
 	public void setCar(Car car) {
+		if(driver == null){
+			throw new IllegalArgumentException("Car can not be null");
+		}
 		this.car = car;
 	}
 
@@ -67,7 +72,7 @@ class Driver {
 public class Main1 {
 	public static void main(String[] args) throws Exception {
 
-		Car car = new ProxyCar(new Driver(32));
+		Car car = new ProxyCar(null);
 		car.driverCar();
 	}
 }
