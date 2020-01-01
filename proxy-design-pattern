@@ -1,49 +1,73 @@
-import java.util.*;
-
-interface Carinf {
-    void driverCar();
-}
-  
-class Car implements Carinf{
-    
-    public void driverCar(){
-        System.out.println( " be a polite driver ");
-    }
-    
+interface Car {
+	void driverCar();
 }
 
-class ProxyCar implements Carinf {
+class CarImpl implements Car {
 
-Driver driver;
-Carinf car;
-  ProxyCar(Driver driver){
-    this.driver = driver;
-    this.car = this;
-  }
+	public void driverCar() {
+		System.out.println(" be a polite driver ");
+	}
 
-  public void driveCar(){
-    if(this.driver.age<18){
-      System.out.println("you dnt have permission ");
-    }
-    else {
-      System.out.println("Wellcome to driving seat");
-    }
+}
 
-  }
+class ProxyCar implements Car {
+
+	private Driver driver;
+	private Car car;
+
+	ProxyCar(Driver driver) {
+		setDriver(driver);
+		setCar(this);
+	}
+
+	public Driver getDriver() {
+		return driver;
+	}
+
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
+
+	public Car getCar() {
+		return car;
+	}
+
+	public void setCar(Car car) {
+		this.car = car;
+	}
+
+	public void driverCar() {
+		if (this.driver.getAge() < 18) {
+			System.out.println("you dnt have permission ");
+		} else {
+			System.out.println("Wellcome to driving seat");
+		}
+
+	}
 }
 
 class Driver {
 
-  int age;
+	private int age;
 
-  Driver(int age){
-    this.age = age;
-  }
+	Driver(int age) {
+		setAge(age);
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
 }
-public class Main {
-    public static void main(String[] args) throws Exception {
-     
-     Carinf car = new ProxyCar(new Driver(14));
-     car.driveCar();
-    }
+
+public class Main1 {
+	public static void main(String[] args) throws Exception {
+
+		Car car = new ProxyCar(new Driver(32));
+		car.driverCar();
+	}
 }
